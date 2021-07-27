@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+
 const bodyParser = require('body-parser')
 
 require('dotenv').config()
@@ -14,23 +15,46 @@ mongoose.connect(process.env.DATABASE_URL, {
   useCreateIndex: true
 }).then(() => console.log('Connected to MongoDB'))
 
+
+
 app.use(express.static('html'))
 app.use(bodyParser.json())
 
 const getTweets = async () => {
-  // todo: get all tweets
+  return await Tweet.find()
+  /*.then((user) => {
+      res.status(200);
+      res.send(user);
+    })
+    .catch((err) => {
+      res.status(400);
+      console.log(err);
+    });*/
 }
 
 const getUserTweets = async username => {
-  // todo: get all tweets from a specific user
+  return await Tweet.find({ username: username });
 }
 
 const createTweet = async (username, text) => {
-  // todo: create a tweet with a username and text
-}
+ return new Tweet({
+   text,
+   username,
+ }).save()
+  /*.then((tweet) => {
+        res.status(201).json({ tweet });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(400).json({ err });
+      });
+*/
+    }
 
 const deleteTweet = async id => {
-  // todo: delete a single tweet, given the id
+ return Tweet.deleteMany({
+   _id: id,
+ });
 }
 
 /*

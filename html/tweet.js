@@ -1,13 +1,12 @@
 const URL = 'http://localhost:3000/api/tweet'
 
-document.addEventListener('click', event => {
-  if (event.target.id === 'tweet') postTweet()
-  if (event.target.className === 'delete') {
-    const id = event.target.parentNode.parentNode.id
-    deleteTweet(id)
+document.addEventListener("click", (event) => {
+  if (event.target.id === "tweet") postTweet();
+  if (event.target.className === "delete") {
+    const id = event.target.parentNode.parentNode.id;
+    deleteTweet(id);
   }
-})
-
+});
 const createTweet = tweet => {
   const tweets = document.getElementById('tweets')
 
